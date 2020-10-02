@@ -1,0 +1,225 @@
+#include <iostream>
+
+using namespace std;
+
+void punto1 (){ //esta funcion identifica si el caracter ingresado es vocal, consonante o por lo contrario si no es una letra.
+    char caracter;
+    int salir = 2;
+    while (salir == 2){
+    cout << "Ingrese caracter: ";
+    cin >> caracter;
+    if ((caracter>=65) && (caracter<=90)){ //caracteres correspondientes al abecedario en mayuscula.
+        if ((caracter==65)||(caracter==69)||(caracter==73)||(caracter==79)||(caracter==85)) //caracteres correspondientes a vocales mayusculas.
+            cout << caracter <<" Es una vocal"<<endl;
+     else
+            cout << caracter <<" Es una consonante"<<endl;
+        }
+    else if ((caracter>=97)&&(caracter<=122)){ //caracteres correspondientes al abecedario en minuscula.
+        if ((caracter==97)||(caracter==101)||(caracter==105)||(caracter==111)||(caracter==117)) //caracteres correspondientes a vocales en minuscula.
+            cout << caracter <<" Es una vocal"<<endl;
+     else
+            cout << caracter <<" Es una consonante"<<endl;
+        }
+   /* else if ((caracter == 164) || (caracter == 165))
+        cout << "Es una letra" << endl;*/ // Me sale un error al querer comparar la ñ con caracteres
+    else
+        cout << caracter<< " No es una letra"<< endl;
+    cout << "Presione 1 para salir o 2 para seguir"<<endl;
+    cin >> salir;
+    }
+}
+
+void punto3 (){ // esta funcion lee la entrada de una fecha en dias y meses. Dice si es valida la fecha o no.
+    int mes = 0, dia = 0;
+    cout << "Ingrese mes " << endl;
+    cin >> mes;
+    if (mes >0 && mes <= 12){ //si el mes es mayor a 12 entonces no es valido
+        cout << "ingrese dia " << endl;
+        cin >> dia;
+        if ((mes == 1)||(mes == 3)||(mes == 5)||(mes == 7)||(mes == 8)||(mes == 10)||(mes == 12)){// estos meses del año tienen 31 dias
+            if ((dia >0) && (dia <=31))
+                cout << dia <<"/"<< mes << " Es una fecha valida" << endl;
+            else
+                cout << dia <<"/"<< mes << " Es una fecha invalida" << endl;
+         }
+        else if ((mes == 4)||(mes == 5)||(mes == 9)||(mes == 11)){// estos meses del año tienen 30 dias
+            if ((dia >0) && (dia <=30))
+               cout << dia <<"/"<< mes << " Es una fecha valida" << endl;
+            else
+                cout << dia <<"/"<< mes << " Es una fecha invalida" << endl;
+        }
+
+        else if ((mes == 2) && (dia>0 && dia <=29) )
+          cout << dia <<"/"<< mes << " fecha valida en anio viciesto " << endl;//febrero solo tiene 29 dias en año biciesto
+        else
+            cout << dia <<"/"<< mes << " Es una fecha invalida" << endl;
+   }
+    else
+        cout << dia <<"/"<< mes << " Es una fecha invalida" << endl;
+
+}
+
+void punto5 (){ //patron en la pantalla.
+    int dimension = 0;
+    cout << "Ingrese dimension de la figura " << endl;
+    cin >> dimension;
+    if (dimension % 2 !=0){
+        for (int i=0;i<=(dimension/2)+1;i++){//primera parte de la figura, divido la dimension en 2 y luego agrego 1 para lograr asi la primera mitad
+            for (int e=i; e<=dimension-1;e++){
+                cout << " ";
+            }
+            for (int a=1;a<=(2*i)-1;a++){ //me imprime los asteriscos en forma ascendente
+                cout << "*";
+            }
+            cout <<endl;
+        }
+        for (int i=(dimension-1)/2;i>=1;i--){//segunda parte de la figura, divido nuevamente entre 2 pero no le agrego nada y logro la segunda parte de la figura.
+            for (int e=i; e<=dimension-1;e++){
+                cout << " ";
+            }
+            for (int a=1;a<=(2*i)-1;a++){ //me imprime los asteriscos en forma descendente
+                cout << "*";
+            }
+            cout <<endl;
+        }
+    }
+    else
+        cout << "Solo se acepta un numero impar" <<endl;
+}
+
+void punto7 (){ //suma de pares en la serie de fibonacci.
+    int c = 0, c1= 0, c2 = 1, cantidad = 0, pares=0;
+    cout << "Ingrese numero " << endl;
+    cin >> cantidad;
+    while (c < cantidad){
+        c1 = c2;// en estas tres linea se hace la serie de fibonacci
+        c2 = c;
+        c = c1 + c2;
+        if (c % 2 == 0) //division modulo por 2 para saber si es par o impar y asi sumar los numeros pares.
+            pares +=c;
+    }
+    cout << "El resultado de la suma es" <<pares << endl;
+}
+
+void punto8 (){ //suma de todos los multiplos de a y b menores que c
+    int a = 0, b=0, c=0, multiplos = 0, cont=1, mul2 = 0, cont2 = 1, sumatoria2 = 0, sumatoria1 = 0, resultado = 0;
+    cout << "ingresenumero A:";
+    cin >> a;
+    cout << "ingrese numero B:";
+    cin >> b;
+    cout << "ingrese numero C:";
+    cin >> c;
+    while (((a*cont) < c) || ((b*cont2) < c)){ //Se evalua que los numeros ingresados al buscar sus multiplos sean menores que C.
+        if ((a*cont) < c){
+            multiplos = a * cont; //Busco los multiplos de A
+            cont++;
+            //cout << "resA "<< multiplos<<endl;
+            if (multiplos != mul2)
+                sumatoria1 += multiplos;
+        }
+        if ((b*cont2) < c){
+            mul2 = b * cont2; //Busco los multiplos de A
+            cont2++;
+            //cout << "resB "<< mul2<<endl;
+            if (multiplos != mul2)
+                sumatoria2 +=mul2;
+        }
+    }
+    cout << "Sumatoria de todos los multiplos "<< sumatoria1<<endl;
+    cout << "Sumatoria de todos los multiplos "<< sumatoria2<<endl;
+    resultado = sumatoria1 + sumatoria2; //resultado de la sumatoria entre multiplos de A Y B
+    cout << "Resultado "<< resultado<<endl;
+}
+
+void punto10 (){//Imprime el enesimo primo solicitado.
+    int num = 0, cont = 0, pos = 0, i = 1;
+    cout << "ingrese un numero: ";
+    cin >> num;
+
+    while (pos < num){
+          for (int j=1; j<=i;j++){
+              if (i%j==0) //Busco si son primos con la division modulo.
+                 cont++;
+          }
+          if (cont == 2){
+             cout << pos + 1 << " " << i << endl; //Si tiene solo dos divisores entonces es primo y lo hago aparecer en pantalla con su posicion.
+             cont = 0;
+             pos ++;
+          }
+          else //Si tiene mas de dos divisores, entonces no es primo y se reinicia el contador para buscar el siguiente numero.
+              cont = 0;
+          i++;
+    }
+
+    cout << "El primo numero " << num << " es el " << i-1 << endl;
+}
+
+void punto12 (){ //Maximo factor primo de un numero.
+    int num = 0, num1 = 0, maximo = 0;
+    cout <<"Ingrese numero ";
+    cin >> num;
+    num1 = num;
+        for (int i = 2;num>1;i++){
+           while (num % i == 0){//Busco si es un numero primo.
+           num /= i;
+           maximo = i; //toma el valor del ultimo primo.
+         }
+         }
+        cout << "El mayor factor primo de " << num1 << " es el " << maximo << endl;
+}
+
+void punto13 (){//Suma de todos los primos menores que el numero ingresado.
+    int cont = 0, num = 0, suma = 0;
+    cout << "Ingrese numero: ";
+    cin >> num;
+     for (int i=1;i<num;i++){
+         for (int j=1; j<=i;j++){
+             if (i%j==0) //Busco si son primos
+                 cont++;
+         }
+         if (cont == 2){
+             cout << i << endl; //Si tiene solo dos divisores entonces es primo y lo hago aparecer en pantalla.
+             suma += i; //sumo los numeros primos.
+             cont = 0;
+         }
+         else //Si tiene mas de dos divisores, entonces no es primo y se reinicia el contador para buscar el siguiente numero.
+             cont = 0;
+     }
+     cout << "El resultado de la suma es: " <<suma << endl;
+}
+
+
+int main()
+{
+    int option =0;
+    cout << "Ingrese la opcion correspondiente"<<endl;
+    cin >> option;
+    switch (option) {
+    case 1: cout << "Identificacion vocales/consonantes "<<endl; //resuelto
+        punto1();
+        break;
+    case 2: cout << "Dias y meses "<< endl; //resuelto
+        punto3();
+        break;
+    case 3: cout << "Patron (rombo) en la pantalla" <<endl; //resuelto.
+        punto5();
+        break;
+    case 4: cout << "suma de los numeros pares en la serie fibonacci" <<endl;//resuelto
+        punto7 ();
+        break;
+    case 5: cout << "suma de todos los multiplos de a y b menores que c" <<endl; //resuelto
+        punto8 ();
+        break;
+    case 6: cout << "Enesimo numero primo" << endl; //Resuelto.
+        punto10();
+        break;
+    case 7: cout << "Maximo factor primo de un numero" << endl; //Resuelto.
+        punto12();
+        break;
+    case 8: cout << "Suma de numeros primos" << endl; //Resuelto.
+        punto13();
+        break;
+
+    }
+    return 0;
+}
